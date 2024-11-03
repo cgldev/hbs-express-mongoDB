@@ -16,8 +16,9 @@ app.engine(".hbs", hbs.engine);
 app.set("view engine", ".hbs");
 app.set("views", "./views");
 
+// permite servir archivos estáticos
 app.use(express.static(__dirname + "/public"));
-// leer cuerpo de solicitud
+// permite leer cuerpo de solicitud
 app.use(express.urlencoded({ extended: true }));
 // configuro las rutas
 app.use("/", require("./routes/home"));

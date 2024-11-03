@@ -38,7 +38,7 @@ const eliminarUrl = async (req, res) => {
   }
 };
 
-//editar Formulario
+//editar url en el Formulario
 const editarUrlForm = async (req, res) => {
   // tomo el parámetro
   const { id } = req.params;
@@ -53,7 +53,7 @@ const editarUrlForm = async (req, res) => {
   }
 };
 
-//editar
+//actualizar BBDD
 const editarUrl = async (req, res) => {
   const { id } = req.params;
   const { origin } = req.body;
@@ -65,10 +65,22 @@ const editarUrl = async (req, res) => {
   }
 };
 
+// redireccionamiento a url original
+const redireccionamiento = async (req, res) => {
+  const { shortURL } = req.params;
+  try {
+    const urlDB = await Url.findOne({ shortURL: shortURL });
+    res.redirect(urlDB.origin);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   leerUrls,
   agregarUrl,
   eliminarUrl,
   editarUrl,
   editarUrlForm,
+  redireccionamiento,
 };
